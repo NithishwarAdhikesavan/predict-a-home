@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      predictions: {
+        Row: {
+          bathrooms: number
+          bedrooms: number
+          condition: string
+          confidence_high: number | null
+          confidence_low: number | null
+          created_at: string
+          garage: number
+          id: string
+          location: string
+          lot_size: number
+          predicted_price: number | null
+          square_feet: number
+          year_built: number
+        }
+        Insert: {
+          bathrooms: number
+          bedrooms: number
+          condition: string
+          confidence_high?: number | null
+          confidence_low?: number | null
+          created_at?: string
+          garage?: number
+          id?: string
+          location: string
+          lot_size: number
+          predicted_price?: number | null
+          square_feet: number
+          year_built: number
+        }
+        Update: {
+          bathrooms?: number
+          bedrooms?: number
+          condition?: string
+          confidence_high?: number | null
+          confidence_low?: number | null
+          created_at?: string
+          garage?: number
+          id?: string
+          location?: string
+          lot_size?: number
+          predicted_price?: number | null
+          square_feet?: number
+          year_built?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
