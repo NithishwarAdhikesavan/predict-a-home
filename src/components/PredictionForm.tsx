@@ -36,7 +36,7 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
     yearBuilt: 2000,
     lotSize: 5000,
     garage: 2,
-    location: "suburban",
+    location: "adyar",
     condition: "good",
   });
 
