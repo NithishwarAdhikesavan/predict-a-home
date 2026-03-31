@@ -139,7 +139,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-border bg-card py-8 text-center text-sm text-muted-foreground">
-        <p>House Price Predictor — Powered by Machine Learning</p>
+        <p>Chennai House Price Predictor — Powered by Machine Learning</p>
         <p className="mt-1 text-xs">Predictions are estimates and should not be used as financial advice.</p>
       </footer>
     </div>
