@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { HouseFeatures } from "@/lib/api";
+import { CHENNAI_AREAS, type HouseFeatures } from "@/lib/api";
 
 interface PredictionFormProps {
   onSubmit: (features: HouseFeatures) => void;
