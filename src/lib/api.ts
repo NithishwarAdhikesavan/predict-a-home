@@ -1,4 +1,5 @@
-import { supabase } from "@/integrations/supabase/client";
+// FastAPI backend URL — change this when deploying
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 export interface HouseFeatures {
   squareFeet: number;
@@ -46,10 +47,16 @@ export const CHENNAI_AREAS = [
 ];
 
 export async function predictPrice(features: HouseFeatures): Promise<PredictionResult> {
-  const { data, error } = await supabase.functions.invoke("predict-price", {
-    body: features,
+  const response = await fetch(`${API_BASE_URL}/predict-price`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(features),
   });
 
-  if (error) throw new Error(error.message || "Prediction failed");
-  return data as PredictionResult;
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({ detail: "Prediction failed" }));
+    throw new Error(err.detail || "Prediction failed");
+  }
+
+  return response.json();
 }
