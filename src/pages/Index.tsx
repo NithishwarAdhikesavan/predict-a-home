@@ -54,11 +54,11 @@ const Index = () => {
               Machine Learning Powered
             </span>
             <h1 className="mb-4 font-display text-4xl font-bold leading-tight text-primary-foreground md:text-6xl">
-              Know Your Home's
-              <span className="block text-accent"> True Value</span>
+              Know Your Chennai
+              <span className="block text-accent">Property Value</span>
             </h1>
             <p className="mb-8 text-lg text-primary-foreground/80 md:text-xl">
-              Get instant, AI-driven property valuations with transparent factor analysis.
+              Get instant, AI-driven property valuations across 25+ Chennai localities.
               Powered by real market data and advanced regression models.
             </p>
             <motion.a
