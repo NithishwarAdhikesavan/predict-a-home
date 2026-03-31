@@ -20,7 +20,7 @@ const PredictionResult = ({ result }: PredictionResultProps) => {
       {/* Price display */}
       <div className="mb-8 text-center">
         <div className="mb-2 flex items-center justify-center gap-2">
-          <DollarSign className="h-5 w-5 text-primary" />
+          <IndianRupee className="h-5 w-5 text-primary" />
           <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
             Estimated Value
           </span>
