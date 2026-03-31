@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { HouseFeatures } from "@/lib/api";
+import { CHENNAI_AREAS, type HouseFeatures } from "@/lib/api";
 
 interface PredictionFormProps {
   onSubmit: (features: HouseFeatures) => void;
@@ -36,7 +36,7 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
     yearBuilt: 2000,
     lotSize: 5000,
     garage: 2,
-    location: "suburban",
+    location: "adyar",
     condition: "good",
   });
 
@@ -134,15 +134,17 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
           />
         </FormField>
 
-        <FormField icon={MapPin} label="Location Type">
+        <FormField icon={MapPin} label="Chennai Area">
           <Select value={features.location} onValueChange={(v) => handleChange("location", v)}>
             <SelectTrigger className="bg-background">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="urban">Urban</SelectItem>
-              <SelectItem value="suburban">Suburban</SelectItem>
-              <SelectItem value="rural">Rural</SelectItem>
+            <SelectContent className="max-h-60">
+              {CHENNAI_AREAS.map((area) => (
+                <SelectItem key={area.value} value={area.value}>
+                  {area.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </FormField>

@@ -1,6 +1,4 @@
-// ===== PLACEHOLDER API =====
-// Replace this URL with your FastAPI backend endpoint
-const API_BASE_URL = "https://your-fastapi-backend.com";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface HouseFeatures {
   squareFeet: number;
@@ -19,53 +17,39 @@ export interface PredictionResult {
   factors: { name: string; impact: number }[];
 }
 
-// Simulates an API call — replace with real fetch to your FastAPI backend
+export const CHENNAI_AREAS = [
+  { value: "adyar", label: "Adyar" },
+  { value: "anna_nagar", label: "Anna Nagar" },
+  { value: "t_nagar", label: "T. Nagar" },
+  { value: "velachery", label: "Velachery" },
+  { value: "tambaram", label: "Tambaram" },
+  { value: "porur", label: "Porur" },
+  { value: "sholinganallur", label: "Sholinganallur" },
+  { value: "omr", label: "OMR (Old Mahabalipuram Road)" },
+  { value: "ecr", label: "ECR (East Coast Road)" },
+  { value: "guindy", label: "Guindy" },
+  { value: "mylapore", label: "Mylapore" },
+  { value: "besant_nagar", label: "Besant Nagar" },
+  { value: "thiruvanmiyur", label: "Thiruvanmiyur" },
+  { value: "chromepet", label: "Chromepet" },
+  { value: "ambattur", label: "Ambattur" },
+  { value: "perambur", label: "Perambur" },
+  { value: "kilpauk", label: "Kilpauk" },
+  { value: "nungambakkam", label: "Nungambakkam" },
+  { value: "kodambakkam", label: "Kodambakkam" },
+  { value: "medavakkam", label: "Medavakkam" },
+  { value: "pallavaram", label: "Pallavaram" },
+  { value: "perungudi", label: "Perungudi" },
+  { value: "thoraipakkam", label: "Thoraipakkam" },
+  { value: "madipakkam", label: "Madipakkam" },
+  { value: "mogappair", label: "Mogappair" },
+];
+
 export async function predictPrice(features: HouseFeatures): Promise<PredictionResult> {
-  // ---- REPLACE THIS BLOCK with real API call ----
-  // const response = await fetch(`${API_BASE_URL}/predict`, {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(features),
-  // });
-  // if (!response.ok) throw new Error("Prediction failed");
-  // return response.json();
+  const { data, error } = await supabase.functions.invoke("predict-price", {
+    body: features,
+  });
 
-  // Simulated prediction logic for demo purposes
-  await new Promise((r) => setTimeout(r, 1500));
-
-  const base = features.squareFeet * 150;
-  const bedroomBonus = features.bedrooms * 15000;
-  const bathroomBonus = features.bathrooms * 12000;
-  const ageDiscount = (2025 - features.yearBuilt) * 500;
-  const lotBonus = features.lotSize * 5;
-  const garageBonus = features.garage * 20000;
-
-  const conditionMultiplier =
-    features.condition === "excellent" ? 1.2 :
-    features.condition === "good" ? 1.05 :
-    features.condition === "fair" ? 0.9 : 0.75;
-
-  const locationMultiplier =
-    features.location === "urban" ? 1.3 :
-    features.location === "suburban" ? 1.1 : 0.85;
-
-  const predicted = Math.round(
-    (base + bedroomBonus + bathroomBonus - ageDiscount + lotBonus + garageBonus) *
-    conditionMultiplier * locationMultiplier
-  );
-
-  return {
-    predictedPrice: predicted,
-    confidenceInterval: {
-      low: Math.round(predicted * 0.9),
-      high: Math.round(predicted * 1.1),
-    },
-    factors: [
-      { name: "Square Footage", impact: Math.round(base / predicted * 100) },
-      { name: "Location", impact: Math.round((locationMultiplier - 1) * 100) },
-      { name: "Condition", impact: Math.round((conditionMultiplier - 1) * 100) },
-      { name: "Bedrooms", impact: Math.round(bedroomBonus / predicted * 100) },
-      { name: "Year Built", impact: Math.round(-ageDiscount / predicted * 100) },
-    ],
-  };
+  if (error) throw new Error(error.message || "Prediction failed");
+  return data as PredictionResult;
 }

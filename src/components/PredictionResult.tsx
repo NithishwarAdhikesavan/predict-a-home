@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, DollarSign, BarChart3 } from "lucide-react";
+import { TrendingUp, TrendingDown, IndianRupee, BarChart3 } from "lucide-react";
 import type { PredictionResult as PredictionResultType } from "@/lib/api";
 
 interface PredictionResultProps {
@@ -7,7 +7,7 @@ interface PredictionResultProps {
 }
 
 const formatCurrency = (value: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
+  new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(value);
 
 const PredictionResult = ({ result }: PredictionResultProps) => {
   return (
@@ -20,7 +20,7 @@ const PredictionResult = ({ result }: PredictionResultProps) => {
       {/* Price display */}
       <div className="mb-8 text-center">
         <div className="mb-2 flex items-center justify-center gap-2">
-          <DollarSign className="h-5 w-5 text-primary" />
+          <IndianRupee className="h-5 w-5 text-primary" />
           <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
             Estimated Value
           </span>
