@@ -134,15 +134,17 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
           />
         </FormField>
 
-        <FormField icon={MapPin} label="Location Type">
+        <FormField icon={MapPin} label="Chennai Area">
           <Select value={features.location} onValueChange={(v) => handleChange("location", v)}>
             <SelectTrigger className="bg-background">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="urban">Urban</SelectItem>
-              <SelectItem value="suburban">Suburban</SelectItem>
-              <SelectItem value="rural">Rural</SelectItem>
+            <SelectContent className="max-h-60">
+              {CHENNAI_AREAS.map((area) => (
+                <SelectItem key={area.value} value={area.value}>
+                  {area.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </FormField>
