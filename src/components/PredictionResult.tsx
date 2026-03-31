@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, DollarSign, BarChart3 } from "lucide-react";
+import { TrendingUp, TrendingDown, IndianRupee, BarChart3 } from "lucide-react";
 import type { PredictionResult as PredictionResultType } from "@/lib/api";
 
 interface PredictionResultProps {
