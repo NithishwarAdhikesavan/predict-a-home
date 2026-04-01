@@ -19,6 +19,7 @@ const Index = () => {
   const [result, setResult] = useState<PredictionResultType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { user, signOut } = useAuth();
 
   const handlePredict = async (houseFeatures: HouseFeatures) => {
     setIsLoading(true);
