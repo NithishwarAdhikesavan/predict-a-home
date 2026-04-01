@@ -28,6 +28,7 @@ export type Database = {
           lot_size: number
           predicted_price: number | null
           square_feet: number
+          user_id: string | null
           year_built: number
         }
         Insert: {
@@ -43,6 +44,7 @@ export type Database = {
           lot_size: number
           predicted_price?: number | null
           square_feet: number
+          user_id?: string | null
           year_built: number
         }
         Update: {
@@ -58,7 +60,32 @@ export type Database = {
           lot_size?: number
           predicted_price?: number | null
           square_feet?: number
+          user_id?: string | null
           year_built?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+          username: string | null
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+          updated_at?: string
+          username?: string | null
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          username?: string | null
         }
         Relationships: []
       }
