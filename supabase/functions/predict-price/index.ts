@@ -107,10 +107,19 @@ Deno.serve(async (req) => {
 
     const result = predictPrice(features);
 
-    // Store in DB
+    // Extract user from auth header
+    const authHeader = req.headers.get("Authorization");
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
+
+    let userId: string | null = null;
+    if (authHeader) {
+      const token = authHeader.replace("Bearer ", "");
+      const anonClient = createClient(supabaseUrl, Deno.env.get("SUPABASE_ANON_KEY")!);
+      const { data: { user } } = await anonClient.auth.getUser(token);
+      userId = user?.id ?? null;
+    }
 
     await supabase.from("predictions").insert({
       square_feet: features.squareFeet,
@@ -124,6 +133,7 @@ Deno.serve(async (req) => {
       predicted_price: result.predictedPrice,
       confidence_low: result.confidenceInterval.low,
       confidence_high: result.confidenceInterval.high,
+      user_id: userId,
     });
 
     return new Response(JSON.stringify(result), {

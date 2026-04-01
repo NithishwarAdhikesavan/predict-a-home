@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Shield, Zap, ArrowDown } from "lucide-react";
+import { Brain, Shield, Zap, ArrowDown, LogOut } from "lucide-react";
 import heroImage from "@/assets/hero-house.jpg";
 import PredictionForm from "@/components/PredictionForm";
 import PredictionResult from "@/components/PredictionResult";
 import { predictPrice, type HouseFeatures, type PredictionResult as PredictionResultType } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@/components/ui/button";
 
 const features = [
   { icon: Brain, title: "ML-Powered", desc: "Advanced algorithms trained on real market data" },
@@ -17,6 +19,7 @@ const Index = () => {
   const [result, setResult] = useState<PredictionResultType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { user, signOut } = useAuth();
 
   const handlePredict = async (houseFeatures: HouseFeatures) => {
     setIsLoading(true);
@@ -37,6 +40,26 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Top bar */}
+      <div className="absolute right-4 top-4 z-20 flex items-center gap-3">
+        {user && (
+          <>
+            <span className="rounded-full bg-card/80 px-3 py-1 text-sm font-medium text-foreground backdrop-blur">
+              {user.user_metadata?.display_name || user.email}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={signOut}
+              className="gap-1.5 bg-card/80 backdrop-blur"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              Sign Out
+            </Button>
+          </>
+        )}
+      </div>
+
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
