@@ -40,6 +40,26 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Top bar */}
+      <div className="absolute right-4 top-4 z-20 flex items-center gap-3">
+        {user && (
+          <>
+            <span className="rounded-full bg-card/80 px-3 py-1 text-sm font-medium text-foreground backdrop-blur">
+              {user.user_metadata?.display_name || user.email}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={signOut}
+              className="gap-1.5 bg-card/80 backdrop-blur"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              Sign Out
+            </Button>
+          </>
+        )}
+      </div>
+
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
