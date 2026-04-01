@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Shield, Zap, ArrowDown } from "lucide-react";
+import { Brain, Shield, Zap, ArrowDown, LogOut } from "lucide-react";
 import heroImage from "@/assets/hero-house.jpg";
 import PredictionForm from "@/components/PredictionForm";
 import PredictionResult from "@/components/PredictionResult";
 import { predictPrice, type HouseFeatures, type PredictionResult as PredictionResultType } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@/components/ui/button";
 
 const features = [
   { icon: Brain, title: "ML-Powered", desc: "Advanced algorithms trained on real market data" },
