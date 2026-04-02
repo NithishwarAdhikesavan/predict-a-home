@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Shield, Zap, ArrowDown, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Brain, Shield, Zap, ArrowDown, LogOut, UserCircle } from "lucide-react";
 import heroImage from "@/assets/hero-house.jpg";
 import PredictionForm from "@/components/PredictionForm";
 import PredictionResult from "@/components/PredictionResult";
