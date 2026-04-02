@@ -21,6 +21,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   const handlePredict = async (houseFeatures: HouseFeatures) => {
     setIsLoading(true);
