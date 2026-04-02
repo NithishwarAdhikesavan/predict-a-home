@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Shield, Zap, ArrowDown, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Brain, Shield, Zap, ArrowDown, LogOut, UserCircle } from "lucide-react";
 import heroImage from "@/assets/hero-house.jpg";
 import PredictionForm from "@/components/PredictionForm";
 import PredictionResult from "@/components/PredictionResult";
@@ -20,6 +21,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   const handlePredict = async (houseFeatures: HouseFeatures) => {
     setIsLoading(true);
@@ -44,9 +46,15 @@ const Index = () => {
       <div className="absolute right-4 top-4 z-20 flex items-center gap-3">
         {user && (
           <>
-            <span className="rounded-full bg-card/80 px-3 py-1 text-sm font-medium text-foreground backdrop-blur">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/profile")}
+              className="gap-1.5 bg-card/80 backdrop-blur"
+            >
+              <UserCircle className="h-3.5 w-3.5" />
               {user.user_metadata?.display_name || user.email}
-            </span>
+            </Button>
             <Button
               variant="outline"
               size="sm"
